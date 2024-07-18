@@ -1,16 +1,20 @@
 {
   "name": "web-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple Node.js web server",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abdis-lab/web-server.git"
+  },
+  "author": "Abdisalam Kadir",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.17.1",
+    "ejs": "^3.1.6"
   }
 }
