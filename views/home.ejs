@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Home Page</h1>
+    </header>
+    <div class="container">
+        <ul>
+            <% items.forEach(item => { %>
+                <li><a href="/detail?id=<%= item.id %>"><%= item.title %></a></li>
+            <% }); %>
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; 2024 Abdisalam Kadir</p>
+    </footer>
+</body>
+</html>

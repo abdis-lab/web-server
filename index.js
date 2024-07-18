@@ -1,4 +1,5 @@
 import express from 'express';
+import { getAll, getItem } from './data.js';
 
 const app = express();
 const port = 3000;
@@ -7,11 +8,18 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the home page!');
+    const items = getAll();
+    res.render('home', { items });
 });
 
-app.get('/about', (req, res) => {
-    res.send('This is the about page. Information about yourself goes here.');
+app.get('/detail', (req, res) => {
+    const id = req.query.id;
+    const item = getItem(id);
+    if (item) {
+        res.render('detail', { item });
+    } else {
+        res.status(404).send('Item not found');
+    }
 });
 
 app.use((req, res) => {
