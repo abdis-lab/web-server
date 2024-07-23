@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Detail Page</title>
-    <link rel="stylesheet" href="/public/styles.css">
-</head>
-<body>
-    <header>
-        <h1>Detail Page</h1>
-    </header>
-    <div class="container">
-        <h2><%= item.title %></h2>
-        <p><strong>Artist:</strong> <%= item.artist %></p>
-        <p><strong>Year:</strong> <%= item.year %></p>
-        <p><strong>Genre:</strong> <%= item.genre %></p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detail</title>
+    </head>
+    <body>
+        <h1><%= movie.title %></h1>
+        <p>Year: <%= movie.year %></p>
+        <p>Director: <%= movie.director %></p>
+        <p>Genre: <%= movie.genre %></p>
         <a href="/">Back to Home</a>
-    </div>
-    <footer>
-        <p>&copy; 2024 Your Name</p>
-    </footer>
-</body>
+    </body>
 </html>

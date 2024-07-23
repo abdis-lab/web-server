@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 
-const itemSchema = new mongoose.Schema({
-    title: String,
-    artist: String,
-    year: Number,
-    genre: String
+const commentSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    movie_id: mongoose.Schema.Types.ObjectId,
+    text: String,
+    date: Date
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
-export default Item;
+export default Comment;

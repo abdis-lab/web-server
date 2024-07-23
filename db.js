@@ -1,7 +1,11 @@
+// db.js
 import mongoose from 'mongoose';
 import config from './config.js';
 
-mongoose.connect(config.mongodbUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.mongodbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 const db = mongoose.connection;
 

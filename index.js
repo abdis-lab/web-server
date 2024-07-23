@@ -1,6 +1,8 @@
+// index.js
 import express from 'express';
 import db from './db.js';
-import Item from './itemModel.js';
+import Movie from './models/movie.js';
+import path from 'path';
 
 const app = express();
 const port = 3000;
@@ -10,8 +12,8 @@ app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
     try {
-        const items = await Item.find();
-        res.render('home', { items });
+        const movies = await Movie.find({});
+        res.render('home', { movies }); // Ensure 'movies' is passed here
     } catch (err) {
         res.status(500).send(err);
     }
@@ -19,12 +21,24 @@ app.get('/', async (req, res) => {
 
 app.get('/detail', async (req, res) => {
     try {
-        const id = req.query.id;
-        const item = await Item.findById(id);
-        if (item) {
-            res.render('detail', { item });
+        const movie = await Movie.findById(req.query.id);
+        if (movie) {
+            res.render('detail', { movie });
         } else {
-            res.status(404).send('Item not found');
+            res.status(404).send('Movie not found');
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+app.get('/delete', async (req, res) => {
+    try {
+        const result = await Movie.deleteOne({ _id: req.query.id });
+        if (result.deletedCount === 1) {
+            res.send('Delete succeeded');
+        } else {
+            res.status(404).send('Movie not found');
         }
     } catch (err) {
         res.status(500).send(err);
@@ -37,19 +51,4 @@ app.use((req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
-
-
-app.get('/delete', async (req, res) => {
-    try {
-        const id = req.query.id;
-        const result = await Item.findByIdAndDelete(id);
-        if (result) {
-            res.send('Item deleted successfully');
-        } else {
-            res.status(404).send('Item not found');
-        }
-    } catch (err) {
-        res.status(500).send(err);
-    }
 });
