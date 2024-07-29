@@ -9,7 +9,7 @@ mongoose.connect(config.mongodbUri, {
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', (err) => console.error('MongoDB connection error:', err));
 db.once('open', () => {
     console.log('Connected to MongoDB');
 });

@@ -1,7 +1,7 @@
 // index.js
 import express from 'express';
 import cors from 'cors'; // Importing CORS
-import db from './db.js';
+import './db.js';
 import Movie from './models/movie.js';
 import path from 'path';
 
@@ -18,7 +18,8 @@ app.use(express.static('public'));
 app.get('/', async (req, res) => {
     try {
         const movies = await Movie.find({});
-        res.render('home', { movies });
+        console.log('Fetched movies:', movies); // Log fetched data
+        res.render('home', { movies }); // Pass data to EJS template
     } catch (err) {
         res.status(500).send(err);
     }
@@ -26,14 +27,15 @@ app.get('/', async (req, res) => {
 
 app.get('/detail', async (req, res) => {
     try {
-        const movie = await Movie.findById(req.query.id);
+        const movieId = req.query.id;
+        const movie = await Movie.findById(movieId);
         if (movie) {
-            res.render('detail', { movie });
+            res.render('detail', { movie }); // Render detail view with movie data
         } else {
             res.status(404).send('Movie not found');
         }
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send('Server error');
     }
 });
 
